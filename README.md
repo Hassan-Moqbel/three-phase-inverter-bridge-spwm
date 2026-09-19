@@ -1,4 +1,4 @@
-# P14: Three-Phase Inverter
+﻿# Three-Phase Inverter
 
 ![Power Electronics](https://img.shields.io/badge/Domain-Power_Electronics-FF6F00?style=for-the-badge)
 ![Three-Phase Inverter](https://img.shields.io/badge/Topology-Three_Phase_Inverter-009999?style=for-the-badge)
