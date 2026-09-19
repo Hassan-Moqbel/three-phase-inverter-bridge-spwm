@@ -77,22 +77,22 @@ $$p(t) = v_a(t)i_a(t) + v_b(t)i_b(t) + v_c(t)i_c(t) = 3 V_{ph} I_{ph} \cos(\phi)
 | **Snubber Networks** | RC networks across transistors to suppress inductive turn-off voltage spikes ($dv/dt$) |
 
 ## Six-Step Switching Logic State Matrix
-In classical $180^\circ$ conduction, there are 6 distinct active states (excluding the 2 zero-vectors). Each state lasts for $60^\circ$ electrical.
+In classical $180^\circ$conduction, there are 6 distinct active states (excluding the 2 zero-vectors). Each state lasts for$60^\circ$ electrical.
 | State | Conducting Switches (H=High, L=Low) | Phase A | Phase B | Phase C |
 | :---: | :--- | :---: | :---: | :---: |
-| **1** | A(H), B(L), C(L) | $+2/3 V_{dc}$ | $-1/3 V_{dc}$ | $-1/3 V_{dc}$ |
-| **2** | A(H), B(H), C(L) | $+1/3 V_{dc}$ | $+1/3 V_{dc}$ | $-2/3 V_{dc}$ |
-| **3** | A(L), B(H), C(L) | $-1/3 V_{dc}$ | $+2/3 V_{dc}$ | $-1/3 V_{dc}$ |
-| **4** | A(L), B(H), C(H) | $-2/3 V_{dc}$ | $+1/3 V_{dc}$ | $+1/3 V_{dc}$ |
-| **5** | A(L), B(L), C(H) | $-1/3 V_{dc}$ | $-1/3 V_{dc}$ | $+2/3 V_{dc}$ |
-| **6** | A(H), B(L), C(H) | $+1/3 V_{dc}$ | $-2/3 V_{dc}$ | $+1/3 V_{dc}$ |
+| **1** | A(H), B(L), C(L) | $+2/3 V_{dc}$|$-1/3 V_{dc}$|$-1/3 V_{dc}$ |
+| **2** | A(H), B(H), C(L) | $+1/3 V_{dc}$|$+1/3 V_{dc}$|$-2/3 V_{dc}$ |
+| **3** | A(L), B(H), C(L) | $-1/3 V_{dc}$|$+2/3 V_{dc}$|$-1/3 V_{dc}$ |
+| **4** | A(L), B(H), C(H) | $-2/3 V_{dc}$|$+1/3 V_{dc}$|$+1/3 V_{dc}$ |
+| **5** | A(L), B(L), C(H) | $-1/3 V_{dc}$|$-1/3 V_{dc}$|$+2/3 V_{dc}$ |
+| **6** | A(H), B(L), C(H) | $+1/3 V_{dc}$|$-2/3 V_{dc}$|$+1/3 V_{dc}$ |
 
 ## Authentic Artifacts Catalog
 - **Engineering Reports**: [`docs/Model of 3 phase Inverter _ حسن مقبل .pdf`](docs/)
 - **Simulation Waveforms & Prototype Photos**: Located in [`docs/images/`](docs/images/) as **[ORIGINAL SCHEMATIC & HARDWARE ARTIFACTS]**.
 
 ## Engineering Audit & Tradeoffs
-- **Six-Step vs. SPWM/SVPWM**: Six-step inversion requires very slow switching frequencies (e.g., $50\text{Hz}$), resulting in negligible switching losses ($P_{sw}$). However, it generates massive low-order harmonic distortion ($5^{th}$ and $7^{th}$ harmonics), which causes severe acoustic noise and torque pulsation in motors. Transitioning to SPWM or Space Vector PWM (SVPWM) pushes harmonics to the high-frequency switching carrier (e.g., $10\text{kHz}$), easily filtered by the motor inductance, but significantly increases silicon heating due to dynamic switching losses.
+- **Six-Step vs. SPWM/SVPWM**: Six-step inversion requires very slow switching frequencies (e.g., $50\text{Hz}$), resulting in negligible switching losses ($P_{sw}$). However, it generates massive low-order harmonic distortion ($5^{th}$and$7^{th}$harmonics), which causes severe acoustic noise and torque pulsation in motors. Transitioning to SPWM or Space Vector PWM (SVPWM) pushes harmonics to the high-frequency switching carrier (e.g.,$10\text{kHz}$), easily filtered by the motor inductance, but significantly increases silicon heating due to dynamic switching losses.
 - **Filter Requirements**: When driving sensitive loads or complying with grid-tie EMI standards, a bulky and expensive 3-phase LC low-pass filter must be cascaded at the inverter output to reconstruct a pure sinusoidal waveform.
 
 ---
