@@ -8,14 +8,14 @@
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
 ## Executive Overview
-Heavy industrial machinery, from traction motors to conveyor systems, relies overwhelmingly on robust three-phase induction and synchronous motors. This project details the theoretical engineering and physical prototyping of a **Three-Phase Voltage Source Inverter (VSI)**. By synthesizing three alternating AC voltages displaced precisely by $120^\circ$ electrical degrees from a single DC power source, this inverter topology forms the foundational core of Variable Frequency Drives (VFDs) and grid-tied renewable energy systems.
+Heavy industrial machinery, from traction motors to conveyor systems, relies overwhelmingly on robust three-phase induction and synchronous motors. This project details the theoretical engineering and physical prototyping of a **Three-Phase Voltage Source Inverter (VSI)**. By synthesizing three alternating AC voltages displaced precisely by 120° electrical degrees from a single DC power source, this inverter topology forms the foundational core of Variable Frequency Drives (VFDs) and grid-tied renewable energy systems.
 
 > [!CAUTION]
 > **High Voltage DC-Link & Shoot-Through Hazard**
 > Inverter topologies utilize a massive DC-Link bus backed by high-capacity, low-ESR capacitors. These capacitors hold a lethal electrical charge long after the power is disconnected; standard discharge protocols (bleeder resistors) must be followed. Furthermore, the 6-switch bridge is highly susceptible to **Shoot-Through (Cross-Conduction)**. If a high-side and low-side transistor on the same phase leg activate simultaneously due to improper dead-time programming or driver failure, it will create a dead short across the DC-Link, instantly destroying the silicon and potentially vaporizing the copper traces.
 
 ## System Highlights
-- **Three-Phase AC Voltage Synthesis**: Generates Phase U, V, and W waveforms precisely displaced by $120^\circ$ from a singular DC input.
+- **Three-Phase AC Voltage Synthesis**: Generates Phase U, V, and W waveforms precisely displaced by 120° from a singular DC input.
 - **6-Switch Bridge Topology**: Employs a classical three-leg transistor matrix (MOSFETs or IGBTs) for four-quadrant bidirectional power flow.
 - **Floating Gate Driver Stages**: Utilizes specialized half-bridge bootstrap driver ICs to successfully trigger the high-side N-channel transistors floating above ground potential.
 - **Shoot-Through Interlocks**: Implements strict hardware-level dead-time delays to prevent concurrent high/low leg conduction.
@@ -47,8 +47,8 @@ flowchart TD
 
 ## Theoretical & Mathematical Models
 
-### 1. Six-Step ($180^\circ$ Conduction) RMS Voltages
-In fundamental six-step mode, each switch conducts for $180^\circ$. The resulting fundamental RMS output voltages relative to the DC-link voltage ($V_{dc}$) are:
+### 1. Six-Step (180° Conduction) RMS Voltages
+In fundamental six-step mode, each switch conducts for 180°. The resulting fundamental RMS output voltages relative to the DC-link voltage ($V_{dc}$) are:
 **Line-to-Line RMS**:
 $$V_{LL,rms} = \sqrt{\frac{2}{3}} V_{dc} \approx 0.8165 V_{dc}$$
 **Phase-to-Neutral RMS** (assuming a balanced Y-connected load):
@@ -77,7 +77,7 @@ $$p(t) = v_a(t)i_a(t) + v_b(t)i_b(t) + v_c(t)i_c(t) = 3 V_{ph} I_{ph} \cos(\phi)
 | **Snubber Networks** | RC networks across transistors to suppress inductive turn-off voltage spikes ($dv/dt$) |
 
 ## Six-Step Switching Logic State Matrix
-In classical $180^\circ$conduction, there are 6 distinct active states (excluding the 2 zero-vectors). Each state lasts for$60^\circ$ electrical.
+In classical 180°conduction, there are 6 distinct active states (excluding the 2 zero-vectors). Each state lasts for60° electrical.
 | State | Conducting Switches (H=High, L=Low) | Phase A | Phase B | Phase C |
 | :---: | :--- | :---: | :---: | :---: |
 | **1** | A(H), B(L), C(L) | $+2/3 V_{dc}$|$-1/3 V_{dc}$|$-1/3 V_{dc}$ |
@@ -88,18 +88,21 @@ In classical $180^\circ$conduction, there are 6 distinct active states (excludin
 | **6** | A(H), B(L), C(H) | $+1/3 V_{dc}$|$-2/3 V_{dc}$|$+1/3 V_{dc}$ |
 
 ## Authentic Artifacts Catalog
-- **Engineering Reports**: [`docs/Model of 3 phase Inverter _ حسن مقبل .pdf`](docs/)
+- **Engineering Reports**: [`docs/Three_Phase_Inverter_Engineering_Report.pdf`](docs/)
 - **Simulation Waveforms & Prototype Photos**: Located in [`docs/images/`](docs/images/) as **[ORIGINAL SCHEMATIC & HARDWARE ARTIFACTS]**.
 
 ## Engineering Audit & Tradeoffs
-- **Six-Step vs. SPWM/SVPWM**: Six-step inversion requires very slow switching frequencies (e.g., $50\text{Hz}$), resulting in negligible switching losses ($P_{sw}$). However, it generates massive low-order harmonic distortion ($5^{th}$and$7^{th}$harmonics), which causes severe acoustic noise and torque pulsation in motors. Transitioning to SPWM or Space Vector PWM (SVPWM) pushes harmonics to the high-frequency switching carrier (e.g.,$10\text{kHz}$), easily filtered by the motor inductance, but significantly increases silicon heating due to dynamic switching losses.
+- **Six-Step vs. SPWM/SVPWM**: Six-step inversion requires very slow switching frequencies (e.g., $50\text{Hz}$), resulting in negligible switching losses ($P_{sw}$). However, it generates massive low-order harmonic distortion ($5^{th}$ and $7^{th}$ harmonics), which causes severe acoustic noise and torque pulsation in motors. Transitioning to SPWM or Space Vector PWM (SVPWM) pushes harmonics to the high-frequency switching carrier (e.g.,$10\text{kHz}$), easily filtered by the motor inductance, but significantly increases silicon heating due to dynamic switching losses.
 - **Filter Requirements**: When driving sensitive loads or complying with grid-tie EMI standards, a bulky and expensive 3-phase LC low-pass filter must be cascaded at the inverter output to reconstruct a pure sinusoidal waveform.
 
 ---
 
-**Hassan Moqbel Morshed Ghaleb**
-Mechatronics Engineer | Mechanical Design & CAD (SolidWorks & AutoCAD) | Preventive Maintenance & Electromechanical Systems | Industrial Automation, Control Systems, Robotics & Intelligent Machines | CAD/FEA, Embedded Systems, Python & C++
+---
+
+**Hassan Moqbel Morshed Ghaleb**  
+Mechatronics Engineer | Mechanical Design & CAD (SolidWorks & AutoCAD) | Preventive Maintenance & Electromechanical Systems | Industrial Automation, Control Systems, Robotics & Intelligent Machines | CAD/FEA, Embedded Systems, Python & C++  
 [GitHub](https://github.com/Hassan-Moqbel) · [Facebook](https://www.facebook.com/share/1BqxAgVjHi/) · [LinkedIn](https://www.linkedin.com/in/hassan-moqbel)
+
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
