@@ -94,42 +94,69 @@ flowchart TD
 
 In 180° conduction mode, each switch conducts for 180° electrical. The phase-to-neutral terminal voltage ($v_{an}$) Fourier series expansion is:
 
-$$v_{an}(\omega t) = \frac{2 V_{dc}}{\pi} \sum_{n=1,3,5,\dots}^{\infty} \frac{1}{n} \left[ \frac{2}{3} - \frac{1}{3}\cos\left(\frac{n\pi}{3}\right) - \frac{1}{3}\cos\left(\frac{2n\pi}{3}\right) \right] \sin(n\omega t)$$
+$$
+v_{an}(\omega t) = \frac{2 V_{dc}}{\pi} \sum_{n=1,3,5,\dots}^{\infty} \frac{1}{n} \left[ \frac{2}{3} - \frac{1}{3}\cos\left(\frac{n\pi}{3}\right) - \frac{1}{3}\cos\left(\frac{2n\pi}{3}\right) \right] \sin(n\omega t)
+$$
 
 For odd non-triplen harmonics ($n = 1, 5, 7, 11, \dots$), this simplifies to:
 
-$$v_{an}(\omega t) = \frac{2 V_{dc}}{\pi} \left[ \sin(\omega t) + \frac{1}{5}\sin(5\omega t) + \frac{1}{7}\sin(7\omega t) + \dots \right]$$
+$$
+v_{an}(\omega t) = \frac{2 V_{dc}}{\pi} \left[ \sin(\omega t) + \frac{1}{5}\sin(5\omega t) + \frac{1}{7}\sin(7\omega t) + \dots \right]
+$$
 
 The true RMS phase voltage evaluates to:
 
-$$V_{LN,\text{rms}} = \frac{\sqrt{2}}{3} V_{dc} \approx 0.4714 \cdot V_{dc}$$
+$$
+V_{LN,\text{rms}} = \frac{\sqrt{2}}{3} V_{dc} \approx 0.4714 \cdot V_{dc}
+$$
 
 ### 2. Line-to-Line Voltage & Triplen Harmonic Elimination
 
 The line-to-line voltage is $v_{ab}(t) = v_{an}(t) - v_{bn}(t)$. Applying the 120° phase-shift transformation:
 
-$$v_{ab}(\omega t) = \frac{4 V_{dc}}{\pi} \sum_{n=1,3,5,\dots}^{\infty} \frac{1}{n} \cos\left(\frac{n\pi}{6}\right) \sin\left[ n\left(\omega t + \frac{\pi}{6}\right) \right]$$
+$$
+v_{ab}(\omega t) = \frac{4 V_{dc}}{\pi} \sum_{n=1,3,5,\dots}^{\infty} \frac{1}{n} \cos\left(\frac{n\pi}{6}\right) \sin\left[ n\left(\omega t + \frac{\pi}{6}\right) \right]
+$$
 
-For all triplen multiples ($n = 3, 9, 15, \dots$), $\cos(n\pi/6) = 0$. Consequently, triplen harmonics cancel completely across lines:
+For all triplen multiples ($n = 3, 9, 15, \dots$), $\cos(n\pi / 6) = 0$. Consequently, triplen harmonics cancel completely across lines:
 
-$$V_{LL,\text{rms}} = \sqrt{\frac{2}{3}} V_{dc} \approx 0.8165 \cdot V_{dc}$$
+$$
+V_{LL,\text{rms}} = \sqrt{\frac{2}{3}} V_{dc} \approx 0.8165 \cdot V_{dc}
+$$
 
 ### 3. Sinusoidal Pulse-Width Modulation (SPWM) Dynamics
 
 - **Amplitude Modulation Index ($m_a$):**
-  $$m_a = \frac{\hat{V}_{\text{control}}}{\hat{V}_{\text{carrier}}} \implies V_{LL,1,\text{rms}} = \frac{\sqrt{3}}{2\sqrt{2}} m_a V_{dc} \approx 0.612 \cdot m_a V_{dc}$$
+
+$$
+m_a = \frac{\hat{V}_{\text{control}}}{\hat{V}_{\text{carrier}}} \implies V_{LL,1,\text{rms}} = \frac{\sqrt{3}}{2\sqrt{2}} m_a V_{dc} \approx 0.612 \cdot m_a V_{dc}
+$$
+
 - **Frequency Modulation Ratio ($m_f$):**
-  $$m_f = \frac{f_{\text{carrier}}}{f_{\text{control}}} = \frac{f_{sw}}{f_1}$$
+
+$$
+m_f = \frac{f_{\text{carrier}}}{f_{\text{control}}} = \frac{f_{sw}}{f_1}
+$$
 
 ### 4. Dead-Time Insertion Inequality (Shoot-Through Protection)
 
-$$t_{\text{dead}} \ge (t_{\text{off,max}} - t_{\text{on,min}}) + t_{\text{margin}}$$
+$$
+t_{\text{dead}} \ge (t_{\text{off,max}} - t_{\text{on,min}}) + t_{\text{margin}}
+$$
 
 ### 5. Balanced Three-Phase Instantaneous Power
 
-$$P_{3\phi} = \sqrt{3} V_{LL,\text{rms}} I_{L,\text{rms}} \cos(\phi), \quad Q_{3\phi} = \sqrt{3} V_{LL,\text{rms}} I_{L,\text{rms}} \sin(\phi), \quad p_f = \cos(\phi)$$
+$$
+P_{3\phi} = \sqrt{3} V_{LL,\text{rms}} I_{L,\text{rms}} \cos(\phi)
+$$
 
----
+$$
+Q_{3\phi} = \sqrt{3} V_{LL,\text{rms}} I_{L,\text{rms}} \sin(\phi)
+$$
+
+$$
+p_f = \cos(\phi) = \frac{P_{3\phi}}{S_{3\phi}}
+$$
 
 ## Switching State Truth Table (180° Conduction Mode)
 
